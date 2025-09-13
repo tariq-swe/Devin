@@ -9,10 +9,11 @@ module.exports = {
             return interaction.reply({ content: 'You need admin permissions to run this command.', ephemeral: true });
         }
 
-        const categories = ['Project', 'Development'];
+        const categories = ['Project', 'Development', 'Kanban'];
         const channels = {
             'Project': ['general', 'project-overview', 'resources'],
-            'Development': ['dev-discussion', 'todo', 'frontend', 'backend', 'github', 'deployments']
+            'Kanban': ['todo', 'in-progress', 'done'],
+            'Development': ['dev-discussion', 'github', 'frontend', 'backend', 'deployments']
         };
 
         for (const categoryName of categories) {
