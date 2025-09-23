@@ -3,7 +3,7 @@ const { SlashCommandBuilder, PermissionsBitField } = require('discord.js');
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('setup')
-        .setDescription('Sets up the server for a software development project.'),
+        .setDescription('WARNING: Will create numerous channels. Sets up the server for a software development project.'),
     async execute(interaction) {
         if (!interaction.member.permissions.has(PermissionsBitField.Flags.Administrator)) {
             return interaction.reply({ content: 'You need admin permissions to run this command.', ephemeral: true });
