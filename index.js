@@ -3,7 +3,12 @@ const path = require('path');
 const { Client, GatewayIntentBits, REST, Routes } = require('discord.js');
 require('dotenv').config();
 
-const client = new Client({ intents: [GatewayIntentBits.Guilds] });
+const client = new Client({ 
+    intents: [
+        GatewayIntentBits.Guilds,
+        GatewayIntentBits.GuildMembers
+    ] 
+});
 
 // Load command files dynamically
 client.commands = new Map();
