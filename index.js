@@ -36,16 +36,22 @@ const rest = new REST({ version: '10' }).setToken(process.env.TOKEN);
 
 // Handle interactions
 client.on('interactionCreate', async interaction => {
-    if (!interaction.isCommand()) return;
-
-    const command = client.commands.get(interaction.commandName);
-    if (!command) return;
-
-    try {
+    if (interaction.isChatInputCommand()) {
+        const command = client.commands.get(interaction.commandName);
+        if (!command) return;
         await command.execute(interaction);
-    } catch (error) {
-        console.error(error);
-        await interaction.reply({ content: 'There was an error executing that command.', ephemeral: true });
+    } else if (interaction.isModalSubmit()) {
+        const command = client.commands.get('ticket');
+        if (!command) return;
+        await command.handleModalSubmit(interaction);
+    } else if (interaction.isButton()) {
+        const command = client.commands.get('ticket');
+        if (!command) return;
+        await command.handleButton(interaction);
+    } else if (interaction.isStringSelectMenu()) {
+        const command = client.commands.get('ticket');
+        if (!command) return;
+        await command.handleSelect(interaction);
     }
 });
 
